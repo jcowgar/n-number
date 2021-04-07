@@ -22,11 +22,18 @@ export function isValid(nNumber: string): boolean {
  * can no longer be issued. These N-numbers start with NC, NX, NR or NL. Only N-numbers
  * begining with N will be issued for new aircraft.
  *
+ * N1-N99 are also N-numbers that can not be issued as they are reserved for the FAA.
+ *
  * @param nNumber Number to test for issuability
  * @returns boolean true if it can be issued otherwise false
  */
 export function canBeIssued(nNumber: string): boolean {
   const reHistoricPrefixes = /^(NC|NX|NR|NL)/;
+  const reFaa = /^N[1-9]{1,2}$/;
 
-  return nNumber.match(reHistoricPrefixes) == null && isValid(nNumber);
+  return (
+    nNumber.match(reHistoricPrefixes) == null &&
+    nNumber.match(reFaa) == null &&
+    isValid(nNumber)
+  );
 }

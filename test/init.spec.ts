@@ -61,5 +61,12 @@ describe("n-number", () => {
     it("should not allow valid historical N-numbers", () => {
       assert.strictEqual(canBeIssued("NC1234"), false);
     });
+
+    it("should not allow N-numbers reserved for the FAA", () => {
+      assert.strictEqual(canBeIssued("N1"), false);
+      assert.strictEqual(canBeIssued("N5"), false);
+      assert.strictEqual(canBeIssued("N12"), false);
+      assert.strictEqual(canBeIssued("N99"), false);
+    });
   });
 });
